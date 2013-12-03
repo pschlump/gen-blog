@@ -92,6 +92,7 @@ type  TemplateData struct {
 	RefUrl		string
 	MonUrl		string
 	State		string
+	IsProd		string
 	KeyWords	string
 }
 
@@ -1249,7 +1250,7 @@ func main() {
 		StartM: "{{",
 		EndM: "}}",
 		IncludePath: "{{.Dir}}|./tmpl",
-//		MonUrl: "http://localhost:8764/",
+		IsProd: "no",
 	}
 // xyzzy - might be appropriate to put in data at this point
 	for k, v := range globalConfigData { 										//  pull data from cfg.json
@@ -1276,6 +1277,7 @@ func main() {
 		case "PubDate":		templateData.PubDate = v
 
 		case "State":		templateData.State = v
+		case "IsProd":		templateData.IsProd = v
 		case "KeyWords":	templateData.KeyWords = v
 
 		/* Ignored Items */
@@ -1377,7 +1379,7 @@ func main() {
 					allOfThePosts = append ( allOfThePosts, aa )
 					// fmt.Printf ( "prev_pos = %d, just before if\n", prev_pos );
 					if prev_pos >= 0 && prev_pos < pos {
-						fmt.Printf ( "prev_pos=%d --- pos=%d\n", prev_pos, pos );
+						//	fmt.Printf ( "prev_pos=%d --- pos=%d\n", prev_pos, pos );
 						allOfThePosts[prev_pos].IsBodyMostRec = false;
 					}
 					pass1Data.Alphebetical = append ( pass1Data.Alphebetical, &allOfThePosts[ pass1Data.nPosts ] )
